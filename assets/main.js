@@ -12,11 +12,11 @@ const displaystockInfo = function () {
         console.log(res);
         $("#stocks-view").html(`
 
-        <div class="row"><div class="col"><img src="${res.logo.url}" alt="${res.quote.companyName} Logo"></div><div class="col"><div class="row"><h2>${res.quote.companyName}</h2></div><div class="row"><h5>Price: ${res.quote.latestPrice}</h5></div></div></div>
+        <div class="row"><div class="col"><img src="${res.logo.url}" alt="${res.quote.companyName} Logo"></div><div class="col"><div class="row"><h2>${res.quote.companyName}</h2></div><div class="row"><h5>Price: ${res.quote.latestPrice}</h5></div></div><div class="col"></div></div>
                 
         `);
 
-        
+
     });
 
 }
