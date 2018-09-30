@@ -1,4 +1,4 @@
-let stocks = ['GME', 'TSLA', 'GOOG'];
+let stocks = ['GME', 'GOOG','TSLA'];
 
 const displaystockInfo = function () {
 
