@@ -1,4 +1,4 @@
-let stocks = ['FB', 'AAPL', 'TSLA', 'GOOG'];
+let stocks = ['GME', 'TSLA', 'GOOG'];
 
 const displaystockInfo = function () {
 
@@ -9,13 +9,18 @@ const displaystockInfo = function () {
         url: queryURL,
         method: 'GET'
     }).then(function (res) {
-        console.log(res);
-        $("#stocks-view").html(`
+        // console.log(res);        
+        let stocksView = $("#stocks-view");
+        stocksView.html(`
 
-        <div class="row"><div class="col"><img src="${res.logo.url}" alt="${res.quote.companyName} Logo"></div><div class="col"><div class="row"><h2>${res.quote.companyName}</h2></div><div class="row"><h5>Price: ${res.quote.latestPrice}</h5></div></div><div class="col"></div></div>
+        <div class="row"><div class="col"><img src="${res.logo.url}" alt="${res.quote.companyName} Logo"></div><div class="col"><div class="row"><h2>${res.quote.companyName}</h2></div><div class="row"><h5>Price: ${res.quote.latestPrice}</h5></div></div><div class="col"></div></div><div class="row" id="articles"></div>
                 
         `);
-
+        let articles=$("#articles");
+        for (let i = 0; i < res.news.length; i++) {
+            // console.log(res.news[i].headline);
+            articles.append(`<div class="col-3"><a href="${res.news[i].url}">${res.news[i].headline}</a></div>`);
+        }
 
     });
 
@@ -47,7 +52,7 @@ const addButton = function (event) {
         stock = stock.toUpperCase();
         let available = false;
         if (!stocks.includes(stock)) {
-            for (let i = 0; i < res.length; i++) {
+            for (let i = 0; i<10||i < res.length; i++) {
                 if (stock === res[i].symbol) {
                     available = true;
                     stocks.push(stock);
@@ -57,6 +62,8 @@ const addButton = function (event) {
                 }
             } if (available === false) {
                 alert(`${stock} is not an available stock.`);
+                $('#stock-input').val('');
+
             }
         }else{
             alert("That stock already exists.");
